@@ -1,4 +1,4 @@
-<include a CircleCI status badge, here>
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MoyinoluwaA/project-ml-microservice-kubernetes/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MoyinoluwaA/project-ml-microservice-kubernetes/tree/master)
 
 ## Project Overview
 
@@ -45,6 +45,27 @@ source .devops/bin/activate
 ### Kubernetes Steps
 
 * Setup and Configure Docker locally
+    - Install docker desktop or use cloud9 which is inbuilt with docker. Create a docker hub account.
 * Setup and Configure Kubernetes locally
+    - Install virtual machine like `VirtualBox` and `minikube`.
+    - Run `minikube start` to create the cluster
 * Create Flask app in Container
+    - Build image and run locally using `./run_docker.sh`
+    - Upload docker image to dockerhub with `./upload_docker.sh`. Edit the `./upload_docker.sh` with your dockerhub username to push to your repository
 * Run via kubectl
+    - Replace dockerpath with your dockerhub image and run `./run_kubernetes.sh`.
+    - `./make_prediction.sh` command is used to make predictions when the pod is running.
+
+### Folder/Files
+* `.circleci/config.yml`: has a job which lints the code repository.
+* `model_data folder`: contains the raw data in which predictions are made from.
+* `output_txt_files`: has 2 txt files which are the output logs generated when docker and kubernetes ran.
+* `app.py`: contains the code to handle the prediction. An extra log was added.
+* `Dockerfile`: contains the instructions needed to build the docker image.
+* `make_prediction.sh`: script that generates prediction.
+* `Makefile`: contains commands needed for environment setup and code linting.
+* `requirements.txt`: python packages to be installed.
+* `run_docker.sh`: contains the code to build and run docker image.
+* `run_kubernetes.sh`: contains the code to deploy container image to kubernetes and run application.
+* `upload_docker.sh`: script that builds, tags and uploads the docker image to dockerhub.
+
